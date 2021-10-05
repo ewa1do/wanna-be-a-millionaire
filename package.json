@@ -1,0 +1,22 @@
+{
+  "name": "wanna-be-a-millionaire",
+  "version": "1.0.0",
+  "description": "Quiz game created using html, css and javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ewa1do/wanna-be-a-millionaire.git"
+  },
+  "author": "waldinho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ewa1do/wanna-be-a-millionaire/issues"
+  },
+  "homepage": "https://github.com/ewa1do/wanna-be-a-millionaire#readme",
+  "devDependencies": {
+    "jshint": "^2.13.1"
+  }
+}
