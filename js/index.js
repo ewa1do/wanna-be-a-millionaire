@@ -168,6 +168,12 @@ class Game {
     }
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    Game.findQuestionInDB();
+    UI.displayQuestion();
+    UI.displayOptions();
+});
+
 startBtn.addEventListener('click', function () {
     Game.findQuestionInDB();
     UI.displayQuestion();
