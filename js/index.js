@@ -8,7 +8,7 @@ const questionsDB = [
         opt3: 'Web network connection',
         opt4: 'World wide network',
         correct: 'World wide web',
-        id: 1,
+        id: 0,
     },
     {
         question: 'Which one of these characters is not friends with Harry Potter?',
@@ -17,7 +17,7 @@ const questionsDB = [
         opt3: 'Draco Malfoy',
         opt4: 'Hermione Granger',
         correct: 'Draco Malfoy',
-        id: 2,
+        id: 1,
     },
     {
         question: 'Which planet is the hottest?',
@@ -26,7 +26,7 @@ const questionsDB = [
         opt3: 'Mercury',
         opt4: 'Mars',
         correct: 'Mercury',
-        id: 3,
+        id: 2,
     },
     {
         question: 'Fe is the chemical symbol for…',
@@ -35,7 +35,7 @@ const questionsDB = [
         opt3: 'Fluorine',
         opt4: 'Iron',
         correct: 'Iron',
-        id: 4,
+        id: 3,
     },
     {
         question: 'Which country gifted the Statue of Liberty to the U.S.?',
@@ -44,7 +44,7 @@ const questionsDB = [
         opt3: 'France',
         opt4: 'Italy',
         correct: 'France',
-        id: 5,        
+        id: 4,        
     },
     {
         question: 'Which rapper was known for his album Blue Slide Park?',
@@ -53,7 +53,7 @@ const questionsDB = [
         opt3: 'Eminem',
         opt4: 'Mac Miller',
         correct: 'Mac Miller',
-        id: 6,
+        id: 5,
     },
     {
         question: 'What is the most populous city in Canada?',
@@ -62,7 +62,7 @@ const questionsDB = [
         opt3: 'Quebec',
         opt4: 'Vancouver',
         correct: 'Toronto',
-        id: 7, 
+        id: 6, 
     },
     {
         question: 'How often does the moon orbit the Earth?',
@@ -71,7 +71,7 @@ const questionsDB = [
         opt3: 'every 30 days',
         opt4: 'every 365 days',
         correct: 'every 27 days',
-        id: 8,
+        id: 7,
     },
     {
         question: 'Which poet wrote the poem “The Raven”?',
@@ -80,7 +80,7 @@ const questionsDB = [
         opt3: 'Walt Whitman',
         opt4: 'Sylvia Plath',
         correct: 'Edgar Allan Poe',
-        id: 9,
+        id: 8,
     },
     {
         question: 'In The Office, what was the food that Dwight grew on his farm?',
@@ -89,27 +89,27 @@ const questionsDB = [
         opt3: 'onions',
         opt4: 'potatoes',
         correct: 'beets',
-        id: 10,
+        id: 9,
     }
 
 ];
 
-let questionCount = 1;
+let questionCount = 0;
 
 const mainContainer = document.querySelector('.container');
 const questionNum  = document.querySelector('.question-num');
 const questionParr =  document.querySelector('.question');
 const answersDiv = document.querySelector('.answers');
+const modalDiv = document.querySelector('.modal');
 
 const startBtn = document.querySelector('.btn-start');
 const submitBtn = document.querySelector('.submit-btn');
 
 let currentQuestion;
 
-
 class UI {
     static displayQuestion () {
-        return questionParr.textContent = currentQuestion.question;
+            questionParr.textContent = currentQuestion.question;
     }
 
     static displayOptions () {
@@ -136,6 +136,10 @@ class UI {
             }
         });
     }
+
+    static displayModal() {
+        modalDiv.classList.remove('hide');
+    }
 }
 
 class Game {
@@ -156,6 +160,10 @@ class Game {
             UI.clearOptions();
         } else {
             alert('Game Over');
+        } 
+        
+        if (questionCount === questionsDB.length) {
+            modalDiv.classList.remove('hide');
         }
     }
 }
