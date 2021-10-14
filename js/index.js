@@ -90,6 +90,15 @@ const questionsDB = [
         opt4: 'potatoes',
         correct: 'beets',
         id: 9,
+    },
+    {
+        question: 'This is a  test question',
+        opt1: 'option 1',
+        opt2: 'option 2',
+        opt3: 'option 3',
+        opt4: 'option 4',
+        correct: 'option 1',
+        id: 10,  
     }
 
 ];
@@ -104,6 +113,7 @@ const modalDiv = document.querySelector('.modal');
 
 const startBtn = document.querySelector('.btn-start');
 const submitBtn = document.querySelector('.submit-btn');
+const restartBtn = document.querySelector('.restart');
 
 let currentQuestion;
 
@@ -137,8 +147,16 @@ class UI {
         });
     }
 
-    static displayModal() {
+    static displayModal () {
         modalDiv.classList.remove('hide');
+    }
+
+    static removeModal () {
+        modalDiv.classList.add('hide');
+    }
+
+    static updateQuestionNumber () {
+        return questionNum.textContent += questionCount;
     }
 }
 
@@ -162,26 +180,37 @@ class Game {
             alert('Game Over');
         } 
         
-        if (questionCount === questionsDB.length) {
-            modalDiv.classList.remove('hide');
+        if (questionCount === questionsDB.length -1) {
+            UI.displayModal();
         }
+    }
+
+    static start () {
+        Game.findQuestionInDB();
+        UI.displayQuestion();
+        UI.displayOptions();
     }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    Game.findQuestionInDB();
-    UI.displayQuestion();
-    UI.displayOptions();
+    Game.start();
 });
 
-startBtn.addEventListener('click', function () {
-    Game.findQuestionInDB();
-    UI.displayQuestion();
-    UI.displayOptions();
+startBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    Game.start();
 });
 
-submitBtn.addEventListener('click', function () {
+submitBtn.addEventListener('click', function (e) {
+    e.preventDefault();
     Game.compareOption();
+});
+
+restartBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    questionCount = 0;
+    Game.start();
+    UI.removeModal();
 });
 
 UI.showSelectedOption();
