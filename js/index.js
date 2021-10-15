@@ -110,6 +110,7 @@ const questionNum  = document.querySelector('.question-num');
 const questionParr =  document.querySelector('.question');
 const answersDiv = document.querySelector('.answers');
 const modalDiv = document.querySelector('.modal');
+const modalGameOver = document.querySelector('.modal-over')
 
 const startBtn = document.querySelector('.btn-start');
 const submitBtn = document.querySelector('.submit-btn');
@@ -147,17 +148,26 @@ class UI {
         });
     }
 
-    static displayModal () {
+    static displayWinModal () {
         modalDiv.classList.remove('hide');
+    }
+
+    static displayGameOver () {
+        modalGameOver.classList.remove('hide');
     }
 
     static removeModal () {
         modalDiv.classList.add('hide');
     }
 
+    static removeGameOverModal () {
+        modalGameOver.classList.add('hide');
+    }
+
     static updateQuestionNumber () {
         return questionNum.textContent += questionCount;
     }
+
 }
 
 class Game {
@@ -172,16 +182,14 @@ class Game {
 
         if (catchSelected === currentQuestion.correct) {
             questionCount++;
-            Game.findQuestionInDB();
-            UI.displayQuestion();
-            UI.displayOptions();
+            Game.start();
             UI.clearOptions();
         } else {
-            alert('Game Over');
+            UI.displayGameOver();
         } 
         
         if (questionCount === questionsDB.length -1) {
-            UI.displayModal();
+            UI.displayWinModal();
         }
     }
 
@@ -189,6 +197,7 @@ class Game {
         Game.findQuestionInDB();
         UI.displayQuestion();
         UI.displayOptions();
+        UI.clearOptions();
     }
 }
 
@@ -206,11 +215,15 @@ submitBtn.addEventListener('click', function (e) {
     Game.compareOption();
 });
 
-restartBtn.addEventListener('click', function (e) {
+document.querySelector('.hide-divs').addEventListener('click', function (e) {
     e.preventDefault();
-    questionCount = 0;
-    Game.start();
-    UI.removeModal();
+    
+    if (e.target.classList.contains('restart')) {
+        questionCount = 0;
+        Game.start();
+        UI.removeModal();
+        UI.removeGameOverModal();
+    }
 });
 
 UI.showSelectedOption();

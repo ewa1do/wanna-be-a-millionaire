@@ -153,6 +153,10 @@ body {
     cursor: pointer;
 }
 
+.modal-over {
+    background: linear-gradient(to right, var(--color-secondary-light), var(--color-secondary-dark));
+}
+
 .restart {
     background: transparent;
     border: 1px solid var(--primary-white);
