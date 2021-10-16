@@ -28,8 +28,8 @@ body {
     font-family: 'Montserrat', sans-serif;
     color: var(--primary-black);
     font-size: 1.2rem;
-    width: 70%;
-    margin-left: 15%;
+    width: 50%;
+    margin-left: 25%;
     box-shadow: 2px 2px 10px #222;
     height: 100vh
 }
@@ -160,8 +160,38 @@ body {
 .restart {
     background: transparent;
     border: 1px solid var(--primary-white);
-    padding: .5rem;
+    padding: .7rem;
     color: var(--primary-white);
+    border-radius: 7px;
+}
+
+.exit {
+    width: 30%;
+    border: 1px solid var(--color-secondary);
+    width: 15%;
+    border: 2px solid var(--color-secondary);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    box-shadow: 2px 2px 10px var(--primary-black);
+    font-size: 1.5rem;
+    background: linear-gradient(to right,var(--color-secondary-light), var(--color-secondary));
+    color: var(--primary-white);
+    text-shadow: 2px 2px 2px var(--primary-black);  
+}
+
+.exit button {
+    display: inline-block;
+    margin: 1rem 1rem;
+    padding: .4rem .6rem;
+    background: transparent;
+    border: 1px solid var(--primary-white);
+    color: var(--primary-white);
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px var(--primary-black);
 }
 
 .hide {

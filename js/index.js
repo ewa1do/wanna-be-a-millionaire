@@ -115,6 +115,7 @@ const modalGameOver = document.querySelector('.modal-over')
 const startBtn = document.querySelector('.btn-start');
 const submitBtn = document.querySelector('.submit-btn');
 const restartBtn = document.querySelector('.restart');
+const exitBtn = document.querySelector('.btn-exit');
 
 let currentQuestion;
 
@@ -166,6 +167,44 @@ class UI {
 
     static updateQuestionNumber () {
         return questionNum.textContent += questionCount;
+    }
+
+    static createExitBtn () {
+        const infoDiv = document.createElement('div');
+        const p = document.createElement('p');
+        const btnContainer = document.createElement('div');
+        const yes = document.createElement('button');
+        const no = document.createElement('button');
+
+        p.textContent = 'Are you sure you want to exit?';
+        yes.textContent = 'Yes';
+        no.textContent = 'No';
+
+        btnContainer.appendChild(yes);
+        btnContainer.appendChild(no);
+
+        infoDiv.appendChild(p);
+        infoDiv.appendChild(btnContainer);
+
+        infoDiv.classList.add('exit');
+        yes.classList.add('yes');
+        no.classList.add('no');
+
+        document.querySelector('body').appendChild(infoDiv);
+
+        UI.removeExitButton();
+    }
+
+    static removeExitButton () {
+        document.querySelector('.exit').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            if (e.target.classList.contains('yes')) {
+                questionCount = 0;
+                Game.start();
+                document.querySelector('.exit').remove();
+            }
+        });
     }
 
 }
@@ -224,6 +263,11 @@ document.querySelector('.hide-divs').addEventListener('click', function (e) {
         UI.removeModal();
         UI.removeGameOverModal();
     }
+});
+
+exitBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    UI.createExitBtn();
 });
 
 UI.showSelectedOption();
