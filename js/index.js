@@ -166,10 +166,10 @@ class UI {
     }
 
     static updateQuestionNumber () {
-        return questionNum.textContent += questionCount;
+        return questionNum.textContent = questionCount + 1;
     }
 
-    static createExitBtn () {
+    static createExitButton () {
         const infoDiv = document.createElement('div');
         const p = document.createElement('p');
         const btnContainer = document.createElement('div');
@@ -202,6 +202,8 @@ class UI {
             if (e.target.classList.contains('yes')) {
                 questionCount = 0;
                 Game.start();
+                document.querySelector('.exit').remove();
+            } else if (e.target.classList.contains('no')) {
                 document.querySelector('.exit').remove();
             }
         });
@@ -237,37 +239,24 @@ class Game {
         UI.displayQuestion();
         UI.displayOptions();
         UI.clearOptions();
+        UI.updateQuestionNumber();
+    }
+
+    static restart (e) {
+        if (e.target.classList.contains('restart')) {
+            questionCount = 0;
+            Game.start();
+            UI.updateQuestionNumber();
+            UI.removeModal();
+            UI.removeGameOverModal();
+        }
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    Game.start();
-});
-
-startBtn.addEventListener('click', function (e) {
-    e.preventDefault();
-    Game.start();
-});
-
-submitBtn.addEventListener('click', function (e) {
-    e.preventDefault();
-    Game.compareOption();
-});
-
-document.querySelector('.hide-divs').addEventListener('click', function (e) {
-    e.preventDefault();
-    
-    if (e.target.classList.contains('restart')) {
-        questionCount = 0;
-        Game.start();
-        UI.removeModal();
-        UI.removeGameOverModal();
-    }
-});
-
-exitBtn.addEventListener('click', function (e) {
-    e.preventDefault();
-    UI.createExitBtn();
-});
+document.addEventListener('DOMContentLoaded', Game.start);
+startBtn.addEventListener('click', Game.start);
+submitBtn.addEventListener('click', Game.compareOption);
+document.querySelector('.hide-divs').addEventListener('click', e => Game.restart(e));
+exitBtn.addEventListener('click', UI.createExitButton);
 
 UI.showSelectedOption();
