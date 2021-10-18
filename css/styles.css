@@ -166,8 +166,6 @@ body {
 }
 
 .exit {
-    width: 30%;
-    border: 1px solid var(--color-secondary);
     width: 15%;
     border: 2px solid var(--color-secondary);
     position: fixed;
@@ -196,4 +194,27 @@ body {
 
 .hide {
     display: none;
+}
+
+/* Media queries */
+
+
+
+@media only screen and (max-width: 76.8rem) {
+    body {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .exit {
+        width: 22%;
+        top: 29%;
+        min-width: 30%;
+    }
+}
+
+@media only screen and (max-width: 40rem) {
+    .exit {
+        min-width: 50%;
+    }
 }
